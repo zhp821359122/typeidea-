@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        typeidea 博客系统
+    </title>
+</head>
+<body>
+
+    {% if tag %}
+        <h1>标签页:{{ tag.name }}</h1>
+    {% elif category %}
+        <h1>分类页:{{ category.name }}</h1>
+    {% elif post %}
+        <h1>文章页:{{ post.title }}</h1>
+    {% else %}
+        <h1>首页</h1>
+    {% endif %}
+
+    <div>
+        顶部分类：
+        {% for nav in navs %}
+            <a href="{% url 'category_list' nav.id %}">{{ nav.name }}</a>
+        {% endfor %}
+    </div>
+    <hr/>
+
+    {% block main %}
+
+    {% endblock %}
+
+    <div>
+        底部分类:
+        {% for category in categories %}
+            <a href="{% url 'category_list' category.id %}">{{ category.name }}</a>
+        {% endfor %}
+
+    </div>
+    <hr/>
+
+    <div>
+        侧边栏展示：
+        {% for sidebar in sidebars %}
+            <h4>
+            {{ sidebar.title }}
+            </h4>
+            {{ sidebar.content_html }}
+        {% endfor %}
+    </div>
+</body>
+</html>

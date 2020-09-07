@@ -1,0 +1,25 @@
+{% extends './base.html' %}
+{% load comment_block %}
+
+{% block title %}
+    文章页：{{ post.title }}
+{% endblock %}
+
+{% block main %}
+        {% if post %}
+        <h1><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h1>
+        <div style="margin-bottom: 10px">
+            <span style="margin-right: 5px">分类：<a href="{% url 'category_list' post.category.id %}">{{ post.category.name }}</a></span>
+
+            <span>作者：<a href="{% url 'owner_list' post.owner.pk %}">{{ post.owner.username }}</a></span>
+        </div>
+
+        <p>
+            {{ post.content }}
+        </p>
+    {% endif %}
+
+
+{% comment_block request.path %}
+
+{% endblock %}
